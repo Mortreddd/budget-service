@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
-from ..models.category import Category
-from ..models.expense import Expense
-from ..models.user import User
-from ..database.singleton import get_db
+from app.models.category import Category
+from app.models.expense import Expense
+from app.models.user import User
+from app.database.singleton import get_db
 from sqlalchemy.orm import Session, joinedload
 
 router = APIRouter(
@@ -21,6 +21,6 @@ def get_category(category_id: int, db: Session = Depends(get_db)):
     category = (db.query(Category)
                 .where(Category.id == category_id)
                 .options(joinedload(Category.expenses))
-                .all())
+                .first())
 
     return {"category": category}

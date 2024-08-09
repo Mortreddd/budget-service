@@ -2,7 +2,8 @@ from ..database.singleton import Base
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from .expense import Expense
+from app.models.expense import Expense
+from app.models.category import Category
 
 class User(Base):
     __tablename__ = "users"
